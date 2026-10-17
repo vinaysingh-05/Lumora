@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Glass Workspace",
+  "version": "1.0.0",
+  "description": "A fully customizable, high-performance glassmorphic new tab workspace with drag-and-drop widgets and wallpapers.",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "bookmarks"
+  ],
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "minimum_chrome_version": "102"
+}

@@ -1,0 +1,191 @@
+/* Edit Mode Overlays & Handles */
+body.mode-edit .widget {
+  cursor: move;
+  outline: 1.5px dashed rgba(255, 255, 255, 0.4);
+  outline-offset: -1px;
+}
+
+body.mode-edit .widget.selected {
+  outline: 2px solid var(--accent-color);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+body.mode-edit .widget.locked {
+  outline-color: rgba(239, 68, 68, 0.4);
+}
+
+/* In-place Action Ribbon for Active Widget */
+.widget-action-ribbon {
+  position: absolute;
+  top: -38px;
+  left: 0;
+  display: flex;
+  gap: 4px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 200;
+}
+
+.ribbon-btn {
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ribbon-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.ribbon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ribbon-btn.delete:hover {
+  background: rgba(239, 68, 68, 0.5);
+}
+
+/* 8-Point Resize Handles */
+.resize-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffffff;
+  border: 1px solid #111;
+  border-radius: 2px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+body.mode-edit .widget.selected .resize-handle {
+  opacity: 0.9;
+  pointer-events: auto;
+}
+
+body.mode-edit .widget.locked .resize-handle {
+  display: none !important;
+}
+
+.handle-nw { top: -5px; left: -5px; cursor: nwse-resize; }
+.handle-n  { top: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.handle-ne { top: -5px; right: -5px; cursor: nesw-resize; }
+.handle-e  { top: calc(50% - 5px); right: -5px; cursor: ew-resize; }
+.handle-se { bottom: -5px; right: -5px; cursor: nwse-resize; }
+.handle-s  { bottom: -5px; left: calc(50% - 5px); cursor: ns-resize; }
+.handle-sw { bottom: -5px; left: -5px; cursor: nesw-resize; }
+.handle-w  { top: calc(50% - 5px); left: -5px; cursor: ew-resize; }
+
+/* Widget Library Modal Cards */
+.widget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 14px;
+  overflow-y: auto;
+  padding-top: 10px;
+}
+
+.library-item-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.library-item-card:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-2px);
+  border-color: var(--accent-color);
+}
+
+.library-item-card h4 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.library-item-card p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Settings Tabs */
+.settings-tabs {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  margin-bottom: 16px;
+}
+
+.settings-tab-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+}
+
+.settings-tab-btn.active {
+  color: #fff;
+  border-color: var(--accent-color);
+}
+
+.settings-content {
+  overflow-y: auto;
+  max-height: 55vh;
+  padding-right: 4px;
+}
+
+.tab-pane {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tab-pane.active {
+  display: flex;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.setting-group label {
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+}
+
+.setting-hint {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.range-slider {
+  width: 100%;
+  accent-color: var(--accent-color);
+  cursor: pointer;
+}
+
+.upload-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.file-input {
+  display: none;
+}

@@ -1,0 +1,276 @@
+/* Base Widget Container */
+.widget {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  touch-action: none;
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 6px 14px;
+  cursor: grab;
+}
+
+body.mode-view .widget-header {
+  cursor: default;
+}
+
+.widget-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.widget-body {
+  flex: 1;
+  padding: 10px 14px 14px 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  user-select: text;
+}
+
+/* Custom Scrollbars */
+.widget-body::-webkit-scrollbar {
+  width: 4px;
+}
+.widget-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* Clock Widget */
+.widget-clock-display {
+  margin: auto;
+  text-align: center;
+}
+.widget-clock-time {
+  font-size: 44px;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.widget-clock-ampm {
+  font-size: 14px;
+  margin-left: 4px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.widget-clock-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Date Widget */
+.widget-date-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
+.widget-date-month {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.widget-date-day {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+.widget-date-weekday {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Bookmarks & Open Tabs Widget */
+.item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.list-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background 0.15s ease;
+  text-align: left;
+  text-decoration: none;
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+.list-item-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.list-favicon {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.list-title {
+  flex: 1;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-close-btn {
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.tab-close-btn:hover {
+  color: var(--danger-color);
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Shortcuts Widget */
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 12px;
+  align-content: start;
+}
+
+.shortcut-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.shortcut-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.15s, background 0.15s;
+}
+
+.shortcut-tile:hover .shortcut-icon-box {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.shortcut-name {
+  font-size: 11px;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Notes Widget */
+.notes-textarea {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  resize: none;
+  outline: none;
+  font-size: 13px;
+  line-height: 1.5;
+  user-select: text;
+}
+
+/* To-do List Widget */
+.todo-input-form {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 13px;
+}
+
+.todo-item.completed .todo-text {
+  text-decoration: line-through;
+  color: var(--text-dim);
+}
+
+.todo-checkbox {
+  cursor: pointer;
+  accent-color: var(--accent-color);
+}
+
+.todo-delete-btn {
+  margin-left: auto;
+  opacity: 0;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.todo-item:hover .todo-delete-btn {
+  opacity: 1;
+}
+
+.todo-delete-btn:hover {
+  color: var(--danger-color);
+}
+
+/* Profile Card */
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  margin-bottom: 8px;
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.profile-status {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Tab</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/glass.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/widgets.css">
+  <link rel="stylesheet" href="css/editor.css">
+</head>
+<body class="mode-view">
+  <!-- Dynamic Wallpaper Container -->
+  <div id="wallpaper-layer" class="wallpaper-layer"></div>
+  <div id="wallpaper-tint" class="wallpaper-tint"></div>
+
+  <!-- Main Workspace Surface -->
+  <main id="workspace" class="workspace" tabindex="-1">
+    <!-- Centered Google Search Box -->
+    <header class="search-container" id="search-container">
+      <form id="search-form" class="glass-panel search-form" autocomplete="off">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder="Search Google or type a URL..." 
+          aria-label="Google Search"
+          spellcheck="false"
+        >
+        <button type="submit" class="search-submit" title="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </form>
+    </header>
+
+    <!-- Canvas for Movable Widgets -->
+    <section id="widget-canvas" class="widget-canvas"></section>
+  </main>
+
+  <!-- Floating Dock / Quick Navigation Bar -->
+  <nav class="glass-panel dock" id="dock" aria-label="Workspace Controls">
+    <button id="btn-toggle-edit" class="dock-btn" title="Toggle Edit Mode (E)">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      </svg>
+      <span class="dock-label">Edit</span>
+    </button>
+    <button id="btn-add-widget" class="dock-btn edit-only" title="Add Widget">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="16"></line>
+        <line x1="8" y1="12" x2="16" y2="12"></line>
+      </svg>
+      <span class="dock-label">Add</span>
+    </button>
+    <button id="btn-undo" class="dock-btn edit-only" title="Undo (Ctrl+Z)" disabled>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 7v6h6"></path>
+        <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+      </svg>
+    </button>
+    <button id="btn-redo" class="dock-btn edit-only" title="Redo (Ctrl+Y)" disabled>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 7v6h-6"></path>
+        <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path>
+      </svg>
+    </button>
+    <div class="dock-separator edit-only"></div>
+    <button id="btn-settings" class="dock-btn" title="Workspace Settings">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+      <span class="dock-label">Settings</span>
+    </button>
+  </nav>
+
+  <!-- Add Widget Modal Panel -->
+  <aside id="add-widget-modal" class="modal-overlay hidden" aria-modal="true" role="dialog">
+    <div class="glass-panel modal-card add-widget-card">
+      <div class="modal-header">
+        <h2>Widget Library</h2>
+        <button class="modal-close" id="btn-close-widget-modal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-search">
+        <input type="text" id="widget-search-input" placeholder="Search widgets..." class="text-input">
+      </div>
+      <div class="widget-grid" id="widget-library-list">
+        <!-- Rendered dynamically by widget-registry.js -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- Settings Panel Modal -->
+  <aside id="settings-modal" class="modal-overlay hidden" aria-modal="true" role="dialog">
+    <div class="glass-panel modal-card settings-card">
+      <div class="modal-header">
+        <h2>Workspace Settings</h2>
+        <button class="modal-close" id="btn-close-settings-modal" aria-label="Close modal">&times;</button>
+      </div>
+
+      <nav class="settings-tabs">
+        <button class="settings-tab-btn active" data-tab="wallpaper">Wallpaper</button>
+        <button class="settings-tab-btn" data-tab="appearance">Appearance</button>
+        <button class="settings-tab-btn" data-tab="layout">Layout</button>
+        <button class="settings-tab-btn" data-tab="about">About</button>
+      </nav>
+
+      <div class="settings-content">
+        <!-- Wallpaper Pane -->
+        <section class="tab-pane active" id="pane-wallpaper">
+          <div class="setting-group">
+            <label>Custom Wallpaper</label>
+            <div class="upload-wrapper">
+              <input type="file" id="wallpaper-file-input" accept="image/png, image/jpeg, image/webp, image/avif" class="file-input">
+              <button class="glass-btn" id="btn-trigger-upload">Select Local Image</button>
+              <button class="glass-btn danger" id="btn-reset-wallpaper">Reset to Default</button>
+            </div>
+            <p class="setting-hint">Images are stored locally via IndexedDB. Formats: WebP, JPEG, PNG.</p>
+          </div>
+
+          <div class="setting-group">
+            <label for="wallpaper-blur">Background Blur: <span id="val-wallpaper-blur">0px</span></label>
+            <input type="range" id="wallpaper-blur" min="0" max="40" step="1" value="0" class="range-slider">
+          </div>
+
+          <div class="setting-group">
+            <label for="wallpaper-brightness">Background Brightness: <span id="val-wallpaper-brightness">100%</span></label>
+            <input type="range" id="wallpaper-brightness" min="20" max="150" step="5" value="100" class="range-slider">
+          </div>
+
+          <div class="setting-group">
+            <label for="wallpaper-dim">Dim Overlay: <span id="val-wallpaper-dim">10%</span></label>
+            <input type="range" id="wallpaper-dim" min="0" max="90" step="5" value="10" class="range-slider">
+          </div>
+        </section>
+
+        <!-- Appearance Pane -->
+        <section class="tab-pane" id="pane-appearance">
+          <div class="setting-group">
+            <label for="glass-opacity">Glass Opacity: <span id="val-glass-opacity">22%</span></label>
+            <input type="range" id="glass-opacity" min="5" max="85" step="1" value="22" class="range-slider">
+          </div>
+
+          <div class="setting-group">
+            <label for="glass-blur">Glass Blur: <span id="val-glass-blur">24px</span></label>
+            <input type="range" id="glass-blur" min="0" max="50" step="1" value="24" class="range-slider">
+          </div>
+
+          <div class="setting-group">
+            <label for="glass-border-opacity">Border Luminance: <span id="val-glass-border">28%</span></label>
+            <input type="range" id="glass-border-opacity" min="0" max="90" step="2" value="28" class="range-slider">
+          </div>
+
+          <div class="setting-group">
+            <label for="glass-radius">Corner Radius: <span id="val-glass-radius">18px</span></label>
+            <input type="range" id="glass-radius" min="4" max="36" step="2" value="18" class="range-slider">
+          </div>
+
+          <div class="setting-group">
+            <label for="glass-shadow">Shadow Depth: <span id="val-glass-shadow">30%</span></label>
+            <input type="range" id="glass-shadow" min="0" max="100" step="5" value="30" class="range-slider">
+          </div>
+        </section>
+
+        <!-- Layout Pane -->
+        <section class="tab-pane" id="pane-layout">
+          <div class="setting-group">
+            <label for="layout-mode">Positioning Mode</label>
+            <select id="layout-mode" class="glass-select">
+              <option value="free">Free Movement</option>
+              <option value="grid">Snap to Grid (20px)</option>
+              <option value="responsive">Responsive Percentages</option>
+            </select>
+          </div>
+
+          <div class="setting-group">
+            <label>Backup & Restore</label>
+            <div class="btn-group">
+              <button class="glass-btn" id="btn-export-layout">Export JSON</button>
+              <label class="glass-btn file-label" for="layout-import-input">
+                Import JSON
+                <input type="file" id="layout-import-input" accept=".json" class="hidden-input">
+              </label>
+              <button class="glass-btn danger" id="btn-reset-layout">Reset Default Layout</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- About Pane -->
+        <section class="tab-pane" id="pane-about">
+          <h3>Glass Workspace v1.0.0</h3>
+          <p>Local-first, high security Manifest V3 new tab experience.</p>
+          <div class="permissions-notice">
+            <strong>Permissions Declared:</strong>
+            <ul>
+              <li><code>storage</code>: Stores layout preferences and widget contents.</li>
+              <li><code>tabs</code>: Renders the Open Tabs widget and enables tab switching.</li>
+              <li><code>bookmarks</code>: Populates bookmarks in the Bookmarks widget.</li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Runtime Modules -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

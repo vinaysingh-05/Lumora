@@ -1,0 +1,67 @@
+/* Glassmorphism Surface Core */
+.glass-panel {
+  background: rgba(var(--glass-bg-base), var(--glass-opacity));
+  backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity));
+  border-radius: var(--glass-radius);
+  box-shadow: 
+    0 16px 32px 0 rgba(0, 0, 0, calc(var(--glass-shadow-strength) * 0.8)),
+    0 2px 4px 0 rgba(255, 255, 255, calc(var(--glass-border-opacity) * 0.2)) inset;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Fallback for environments lacking backdrop-filter */
+@supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+  .glass-panel {
+    background: rgba(18, 24, 38, 0.88);
+  }
+}
+
+.glass-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: calc(var(--glass-radius) * 0.6);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+
+.glass-btn:active {
+  transform: translateY(0);
+}
+
+.glass-btn.danger {
+  background: rgba(239, 68, 68, 0.25);
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+.glass-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.45);
+}
+
+.glass-select, .text-input {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: calc(var(--glass-radius) * 0.5);
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+}
+
+.glass-select:focus, .text-input:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
