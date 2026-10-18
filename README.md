@@ -66,7 +66,7 @@ create a workspace that reflects your personality.
 
 ### A Little More You. Every Time You Open a Tab.
 
-<img src="https://placehold.co/1200x650/10131f/9daaff?text=LUMORA%0A%0ACustom+New+Tab+Preview" alt="Lumora workspace preview placeholder" width="100%"/>
+<img src="./assets/icons/Screenshot 2026-10-18 133128.png" alt="Lumora workspace preview placeholder" width="100%"/>
 
 *Replace this placeholder with an actual screenshot or GIF of Lumora.*
 
